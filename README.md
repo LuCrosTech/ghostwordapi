@@ -1,3 +1,19 @@
+Author: Luis M Crosby R. 
+Email : Lmcr.com@gmail.com
+
+Instructions to run:
+--------------------
+$gradlew bootRun
+
+Default port is 8083. 
+Can be changed in application.conf
+
+Use with curl GET or browser:
+localhost:8083/tell/{english-word} 
+localhost:8083/tell/hello
+
+================================================================================================================
+
 Here’s the task: 
  
 Ghost Game
