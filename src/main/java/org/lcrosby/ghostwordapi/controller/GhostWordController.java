@@ -23,7 +23,7 @@ public class GhostWordController {
     @Autowired
     private WordAnalyzer wordAnalyzer;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://luiscrosby.com")
     @RequestMapping(method = RequestMethod.GET, value = "/tell/{word}")
     @ResponseBody
     public WordResponse tell(@PathVariable("word")
