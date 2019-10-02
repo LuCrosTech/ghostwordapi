@@ -1,11 +1,12 @@
 package org.lcrosby.ghostwordapi.service;
 
-import org.springframework.util.ResourceUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 
@@ -31,11 +32,12 @@ public class WordAnalyzer {
 
     @PostConstruct
     public void init() throws Exception {
-        File file = ResourceUtils.getFile("classpath:static/gosthGameDict.txt");
-        System.out.println("File Found : " + file.exists());
+        Resource resource = new ClassPathResource("static/gosthGameDict.txt");
         String line;
         trie = new Trie();
-        try (Scanner scanner = new Scanner(file)) {
+        try {
+            InputStream fileAsStream = resource.getInputStream();
+            Scanner scanner = new Scanner(fileAsStream);
 
             while (scanner.hasNext()) {
                 line = scanner.nextLine();

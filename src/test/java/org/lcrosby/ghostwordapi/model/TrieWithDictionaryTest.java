@@ -6,12 +6,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lcrosby.ghostwordapi.service.Trie;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 @RunWith(SpringRunner.class)
@@ -23,11 +24,12 @@ public class TrieWithDictionaryTest {
 
     @Before
     public void init() throws Exception {
-        File file = ResourceUtils.getFile("classpath:static/gosthGameDict.txt");
-        System.out.println("File Found : " + file.exists());
+        Resource resource = new ClassPathResource("static/gosthGameDict.txt");
         String line;
         trie = new Trie();
-        try (Scanner scanner = new Scanner(file)) {
+        try {
+            InputStream fileAsStream = resource.getInputStream();
+            Scanner scanner = new Scanner(fileAsStream);
 
             while (scanner.hasNext()) {
                 line = scanner.nextLine();
